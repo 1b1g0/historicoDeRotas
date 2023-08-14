@@ -1,20 +1,23 @@
-# Maps Helper!
+# UI Para visualizar dados do meu histórico de rotas
 
-### Ideia final seria poder utilizar as informações de deslocamento coletada pelo maps como dados de treino. Podendo utilizar qualquer app (Strava, mapmyride) para controlar o gasto calórico.
+### Ideia final seria poder utilizar as informações de deslocamento coletada pelo maps como dados de treino. Podendo utilizar qualquer app (Strava, mapmyride) para estimar o gasto calórico.
+### Criar uma UI pra plotar as rotas (igual o historico do maps) com infos como: quanto tempo passei fora de casa, metros de subida, ruas que passo mais frequentemente, e etc...
 
-*talvez esses apps já tenham mapeamento de elevação? se não tiver seria massa encontrar uma forma de descobrir (ja temos as coordenadas das rotas)*
+*esses apps já tenham mapeamento de elevação, porém seria um bom projeto se não tiver seria massa encontrar uma forma de descobrir (ja temos as coordenadas das rotas). Seria legal mapear a elevação da minha região e não utilizar chamadas a api toda vez que precisar da elevação de certo ponto, um bom exercício.*
 
 ---
 
 ### Checklist:
 - [x] 1 Dados necessários para criar o treino (GPX) de forma completa. 
 - [ ] Filtrar principais dados de intersse do histórico. 
-- [ ] (separar rotas por dia, formato alvo = gpx, tentar identificar e remover dados irrelevantes dentro da primeira 'filtragem'[pontos duplicados, excluir horários que não faço rotas mas por algum motivo existem ali])
-
+- [ ] (tentar identificar e remover dados irrelevantes dentro da primeira 'filtragem'[pontos duplicados, excluir horários que não faço rotas mas por algum motivo existem ali])
 
 ---
-1 - Modelo gpx 1.1 
+### 1 - Modelo gpx 1.1 
 *http://www.topografix.com/GPX/1/1*
+
+GPX.js
+
 ```
 Exemplo com apenas um par de pontos e dados de elvação.
 

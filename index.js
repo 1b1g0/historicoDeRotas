@@ -25,7 +25,6 @@ fs.readFile(`${path}`,'utf8', (err, data) => {
         console.error('Erro ao ler o arquivo JSON:', err);
         return;
     }
-   
     try {
         // carregar todo o json
         const json = JSON.parse(data);
@@ -34,15 +33,17 @@ fs.readFile(`${path}`,'utf8', (err, data) => {
 
         let seletorAct, seletorPlc;
         // começo no 0
-        const indiceItem = 4;
+        const indiceItem = 2;
         
-        const totalPares = json.timelineObjects.length;
-        // gambis pra arrumar o índice e pegar os pares corretos.
-        if (indiceItem){
-            seletorAct = indiceItem + 2;
-            seletorPlc = indiceItem + 3; 
-        }/* else if (indiceItem == (totalPares - 1)){
+        const totalPares = json.timelineObjects.length /2;
 
+        // gambis pra arrumar o índice e pegar os pares corretos.
+        if (indiceItem > 0){
+            seletorAct = indiceItem + 1;
+            seletorPlc = seletorAct++; 
+        }/* else if (indiceItem < 2){
+            seletorAct = indiceItem + 2;
+            seletorPlc = seletorAct++;
         } */ 
         else {
             seletorAct = indiceItem;
@@ -52,11 +53,21 @@ fs.readFile(`${path}`,'utf8', (err, data) => {
         // json.timelineObjects[0].activitySegment.waypointPath -> pontos lat e lng, distancia e modo de viagem.
         // BEM ÚTIL
 
-        //const pontosRota = json.timelineObjects[seletorRota].activitySegment.waypointPath.waypoints;
-        //const distancia = json.timelineObjects[seletorRota].activitySegment.waypointPath.distanceMeters.toFixed(2);
+        const pontosRota = json.timelineObjects[seletorAct].activitySegment.waypointPath.waypoints;
+        const distancia = json.timelineObjects[seletorAct].activitySegment.waypointPath.distanceMeters.toFixed(2);
+        const l = json.timelineObjects[seletorPlc].placeVisit.location
         //console.log(pontosRota, `\n Distancia percorrida: ${distancia} metros.`);
         // const inicioFim = json.timelineObjects[seletorAct].activitySegment.duration;
-        console.log(json.timelineObjects[seletorAct].activitySegment.simplifiedRawPath);
+        console.log(pontosRota[pontosRota.length -1],
+            `\n\n Dist. Total: ${distancia}`,
+            '\n\n',
+            l.latitudeE7,
+            l.longitudeE7,
+            `\nDif entre ultimo waypoint e primeiro place: `,
+            l.latitudeE7 - pontosRota[pontosRota.length - 1].latE7,' lat',
+            l.longitudeE7 - pontosRota[pontosRota.length - 1].lngE7, 'lng',
+            
+            '\n----- fim -----');
 
     } catch (error){
         console.error('Erro lendo JSON', error);
