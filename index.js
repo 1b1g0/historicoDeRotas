@@ -1,6 +1,4 @@
 
-// início da tentativa de mapear a elevação dos pontos
-
 // verificar a integridade e qualidade dos dados
 // separar em rotas feitas no dia
 
@@ -33,41 +31,50 @@ fs.readFile(`${path}`,'utf8', (err, data) => {
 
         let seletorAct, seletorPlc;
         // começo no 0
-        const indiceItem = 2;
+        const indiceItem = 71;
         
         const totalPares = json.timelineObjects.length /2;
 
         // gambis pra arrumar o índice e pegar os pares corretos.
-        if (indiceItem > 0){
-            seletorAct = indiceItem + 1;
-            seletorPlc = seletorAct++; 
-        }/* else if (indiceItem < 2){
-            seletorAct = indiceItem + 2;
-            seletorPlc = seletorAct++;
-        } */ 
+        if (indiceItem > 0 && indiceItem <= (totalPares - 1)){
+            seletorAct = (indiceItem * 2);
+            seletorPlc = seletorAct + 1; 
+        } else if (indiceItem > (totalPares - 1)){
+            seletorAct = undefined;
+            seletorPlc = undefined;
+            console.log(`Valor máximo do indice = ${totalPares - 1}.`);
+        }  
         else {
             seletorAct = indiceItem;
             seletorPlc = indiceItem + 1;
+            console.log('eh zero')
         }
-        
+
+        console.log('indices:',seletorAct,seletorPlc);
+
         // json.timelineObjects[0].activitySegment.waypointPath -> pontos lat e lng, distancia e modo de viagem.
         // BEM ÚTIL
 
         const pontosRota = json.timelineObjects[seletorAct].activitySegment.waypointPath.waypoints;
         const distancia = json.timelineObjects[seletorAct].activitySegment.waypointPath.distanceMeters.toFixed(2);
         const l = json.timelineObjects[seletorPlc].placeVisit.location
-        //console.log(pontosRota, `\n Distancia percorrida: ${distancia} metros.`);
+        
         // const inicioFim = json.timelineObjects[seletorAct].activitySegment.duration;
-        console.log(pontosRota[pontosRota.length -1],
-            `\n\n Dist. Total: ${distancia}`,
-            '\n\n',
+
+        // log HORRÍVEL pra comparar se a seleção está certa e pra explorar um poucos esses dados.
+        console.log('Coordenadas da rota: ',
+            pontosRota[pontosRota.length - 1],
+            `\n Dist. Total: ${distancia}`,
+            '\n',
             l.latitudeE7,
             l.longitudeE7,
-            `\nDif entre ultimo waypoint e primeiro place: `,
+            `\nDif entre ultimo waypoint e primeiro place:\n`,
             l.latitudeE7 - pontosRota[pontosRota.length - 1].latE7,' lat',
-            l.longitudeE7 - pontosRota[pontosRota.length - 1].lngE7, 'lng',
+            l.longitudeE7 - pontosRota[pontosRota.length - 1].lngE7, 'lng\n',
+            `Início da rota: ${json.timelineObjects[seletorAct].activitySegment.duration.startTimestamp.slice(11,19)}`,
             
             '\n----- fim -----');
+
 
     } catch (error){
         console.error('Erro lendo JSON', error);

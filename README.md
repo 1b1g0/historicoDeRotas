@@ -16,7 +16,8 @@
 ### 1 - Modelo gpx 1.1 
 *http://www.topografix.com/GPX/1/1*
 
-GPX.js
+ - GPXParser 
+*https://www.npmjs.com/package/gpxparser*
 
 ```
 Exemplo com apenas um par de pontos e dados de elvação.
