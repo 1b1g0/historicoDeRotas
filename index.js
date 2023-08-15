@@ -28,7 +28,7 @@ fs.readFile(`${path}`,'utf8', (err, data) => {
         let seletorAct, seletorPlc;
 
         // começo no 0
-        const indiceItem = 65;
+        const indiceItem = 63;
         const totalPares = json.timelineObjects.length /2;
 
         // gambis pra arrumar o índice e pegar os pares corretos.
@@ -52,9 +52,10 @@ fs.readFile(`${path}`,'utf8', (err, data) => {
 
         const pontosRota = json.timelineObjects[seletorAct].activitySegment.waypointPath.waypoints;
         const distancia = json.timelineObjects[seletorAct].activitySegment.waypointPath.distanceMeters.toFixed(2);
+        const timestamp = json.timelineObjects[seletorAct].activitySegment.duration;
         const l = json.timelineObjects[seletorPlc].placeVisit.location;
-        const timestamp = json.timelineObjects[seletorAct].activitySegment.duration.endTimestamp;
         
+        console.log(pontosRota,timestamp,`\nDistancia total: ${distancia}`)
        
     } catch (error){
         console.error('Erro lendo JSON', error);
