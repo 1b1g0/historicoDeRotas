@@ -27,8 +27,6 @@ fs.readFile(`${path}`,'utf8', (err, data) => {
         // carregar todo o json
         const json = JSON.parse(data);
 
-        // actvSeg = par; placeVst = impar
-
         let seletorAct, seletorPlc;
         // começo no 0
         const indiceItem = 71;
@@ -50,7 +48,7 @@ fs.readFile(`${path}`,'utf8', (err, data) => {
             console.log('eh zero')
         }
 
-        console.log('indices:',seletorAct,seletorPlc);
+        console.log('indices:',seletorAct,seletorPlc,'\n');
 
         // json.timelineObjects[0].activitySegment.waypointPath -> pontos lat e lng, distancia e modo de viagem.
         // BEM ÚTIL
@@ -62,18 +60,20 @@ fs.readFile(`${path}`,'utf8', (err, data) => {
         // const inicioFim = json.timelineObjects[seletorAct].activitySegment.duration;
 
         // log HORRÍVEL pra comparar se a seleção está certa e pra explorar um poucos esses dados.
-        console.log('Coordenadas da rota: ',
+        console.log('Coordenada final activitySegment: ',
             pontosRota[pontosRota.length - 1],
-            `\n Dist. Total: ${distancia}`,
-            '\n',
+            '\nCoordenada inicial placeVisit:',
             l.latitudeE7,
             l.longitudeE7,
-            `\nDif entre ultimo waypoint e primeiro place:\n`,
+            `\nDist. Total: ${distancia}\n`,
+            '\n',
+            `\n Dif entre ultimo waypoint e primeiro place:\n`,
             l.latitudeE7 - pontosRota[pontosRota.length - 1].latE7,' lat',
             l.longitudeE7 - pontosRota[pontosRota.length - 1].lngE7, 'lng\n',
-            `Início da rota: ${json.timelineObjects[seletorAct].activitySegment.duration.startTimestamp.slice(11,19)}`,
-            
-            '\n----- fim -----');
+            `\nInício da rota: ${json.timelineObjects[seletorAct].activitySegment.duration.startTimestamp.slice(11,19)}`,
+            `\nFim da rota: ${json.timelineObjects[seletorAct].activitySegment.duration.endTimestamp.slice(11,19)}`,
+
+            '\n\n----- fim -----');
 
 
     } catch (error){
