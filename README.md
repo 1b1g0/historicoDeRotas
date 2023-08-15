@@ -51,7 +51,7 @@ waypointPath -> pode funcionar para construir uma boa resolução da elevação 
 placeVisit -> location e duration: local que provavelmente eu estou/fui / duração (acredito que o **start** é a hora da partida [do local x] e **end** é a hora da chegada ?)  
 
 ---
-**Glossário**
+### **Glossário**
 GPX (GPS Exchange Format) -> *coordenadas, elevação, velocidade... amplamente utilizado e opensource?*
 
 TCX (Training Center XML) -> *desenvolvido pela Garmin, suporta varias brisa como batimento, cadência, temp...*
