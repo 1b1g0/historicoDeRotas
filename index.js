@@ -28,7 +28,7 @@ fs.readFile(`${path}`,'utf8', (err, data) => {
         let seletorAct, seletorPlc;
 
         // começo no 0
-        const indiceItem = 71;
+        const indiceItem = 65;
         const totalPares = json.timelineObjects.length /2;
 
         // gambis pra arrumar o índice e pegar os pares corretos.
@@ -49,26 +49,13 @@ fs.readFile(`${path}`,'utf8', (err, data) => {
         json.timelineObjects[0].activitySegment.waypointPath 
         -> pontos lat e lng, distancia e modo de viagem. 
         */
+
         const pontosRota = json.timelineObjects[seletorAct].activitySegment.waypointPath.waypoints;
         const distancia = json.timelineObjects[seletorAct].activitySegment.waypointPath.distanceMeters.toFixed(2);
-        const l = json.timelineObjects[seletorPlc].placeVisit.location
-
-        /* log HORRÍVEL pra comparar se a seleção está
-        certa e pra explorar um poucos esses dados. */
-        console.log('\nCoordenada final activitySegment:\n',
-            pontosRota[pontosRota.length - 1].latE7,
-            pontosRota[pontosRota.length - 1].lngE7,
-            '\nCoordenada inicial placeVisit:\n',
-            l.latitudeE7,
-            l.longitudeE7,
-            `\nDist. Total: ${distancia}\n`,
-            
-            `\nDif entre ultimo waypoint e primeiro place:\n`,
-            l.latitudeE7 - pontosRota[pontosRota.length - 1].latE7,'lat',
-            l.longitudeE7 - pontosRota[pontosRota.length - 1].lngE7, 'lng\n',
-            `\nInício da rota: ${json.timelineObjects[seletorAct].activitySegment.duration.startTimestamp.slice(11,19)}`,
-            `\nFim da rota: ${json.timelineObjects[seletorAct].activitySegment.duration.endTimestamp.slice(11,19)}`,
-            '\n\n----- fim -----');
+        const l = json.timelineObjects[seletorPlc].placeVisit.location;
+        const timestamp = json.timelineObjects[seletorAct].activitySegment.duration.endTimestamp;
+        
+       
     } catch (error){
         console.error('Erro lendo JSON', error);
     }
