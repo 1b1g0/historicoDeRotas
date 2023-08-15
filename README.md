@@ -3,7 +3,7 @@
 ### Ideia final seria poder utilizar as informações de deslocamento coletada pelo maps como dados de treino. Podendo utilizar qualquer app (Strava, mapmyride) para estimar o gasto calórico.
 ### Criar uma UI pra plotar as rotas (igual o historico do maps) com infos como: quanto tempo passei fora de casa, metros de subida, ruas que passo mais frequentemente, e etc...
 
-*esses apps já tenham mapeamento de elevação, porém seria um bom projeto se não tiver seria massa encontrar uma forma de descobrir (ja temos as coordenadas das rotas). Seria legal mapear a elevação da minha região e não utilizar chamadas a api toda vez que precisar da elevação de certo ponto, um bom exercício.*
+*Seria legal mapear a elevação da minha região e não utilizar chamadas a api toda vez que precisar da elevação de certo ponto, um bom exercício.*
 
 ---
 
