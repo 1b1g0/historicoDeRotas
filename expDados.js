@@ -1,21 +1,9 @@
 
 // verificar a integridade e qualidade dos dados
 // separar em rotas feitas no dia
-
+let gpxParser = require('gpxparser');
 const fs = require('fs');
 const path = '../2023_AUGUST.json'
-
- /*  VO COLOCAR OS PONTOS DE ACESSO A INFOS INÚTEIS AQUI \/ 
-        
-        json.timelineObjects[0].activitySegment.activities[0] 
-        -> tipo de veículo utilizado na rota.(1 em diante são veiculos com menos prob.) 
-        
-        essa parte é meio inútil pra mim, ja sei que foram viagens de bicicleta,
-        então não seria necessário acessar essa parte dos dados. 
-
-                ---- ACABO A SEÇÃO DE INFOS INÚTEIS ---- 
-        ---------------------------------------------------------
-        */
 
 fs.readFile(`${path}`,'utf8', (err, data) => {
     if (err){
@@ -26,8 +14,6 @@ fs.readFile(`${path}`,'utf8', (err, data) => {
         // carregar todo o json
         const json = JSON.parse(data);
         let seletorAct, seletorPlc;
-
-        // começo no 0
         const indiceItem = 63;
         const totalPares = json.timelineObjects.length /2;
 
@@ -49,13 +35,15 @@ fs.readFile(`${path}`,'utf8', (err, data) => {
         json.timelineObjects[0].activitySegment.waypointPath 
         -> pontos lat e lng, distancia e modo de viagem. 
         */
-
         const pontosRota = json.timelineObjects[seletorAct].activitySegment.waypointPath.waypoints;
         const distancia = json.timelineObjects[seletorAct].activitySegment.waypointPath.distanceMeters.toFixed(2);
         const timestamp = json.timelineObjects[seletorAct].activitySegment.duration;
         const l = json.timelineObjects[seletorPlc].placeVisit.location;
+
+        const lat = parseFloat(pontosRota[0].latE7 / 1000000);
+        const lng = parseFloat(pontosRota[0].lngE7 / 1000000) 
         
-        console.log(pontosRota,timestamp,`\nDistancia total: ${distancia}`)
+        console.log(timestamp,`\nDistancia total: ${distancia}`,lat,lng);
        
     } catch (error){
         console.error('Erro lendo JSON', error);
