@@ -8,7 +8,7 @@
 ---
 
 ### Checklist:
-- [x] 1 Dados necessários para criar o treino (GPX) de forma completa. 
+- [ ] Dados necessários para criar o treino (GPX) de forma completa. 
 - [ ] Filtrar principais dados de intersse do histórico. 
 - [ ] (tentar identificar e remover dados irrelevantes dentro da primeira 'filtragem'[pontos duplicados, excluir horários que não faço rotas mas por algum motivo existem ali])
 

@@ -40,8 +40,8 @@ fs.readFile(`${path}`,'utf8', (err, data) => {
         const timestamp = json.timelineObjects[seletorAct].activitySegment.duration;
         const l = json.timelineObjects[seletorPlc].placeVisit.location;
 
-        const lat = parseFloat(pontosRota[0].latE7 / 1000000);
-        const lng = parseFloat(pontosRota[0].lngE7 / 1000000) 
+        const lat = parseFloat(pontosRota[0].latE7 / 10000000);
+        const lng = parseFloat(pontosRota[0].lngE7 / 10000000) 
         
         console.log(timestamp,`\nDistancia total: ${distancia}`,lat,lng);
        
